@@ -1,0 +1,162 @@
+<ol class="breadcrumb">
+  	<li>
+  		<a href="#/">Home</a>
+  	</li>
+    <li lass="active">Functions</li>
+</ol>
+<h2>Object Methods</h2>
+<p>The property of an object is considered a method when its value is actually a function. For example:</p>
+<pre>
+  var book = {
+	title: "Object Oriented Javascript",
+	author: "Nicholas C. Zakas",
+	sayTitle: function() {
+ 		console.log("Book title: " + book.title);
+	}
+  }
+</pre>
+<div class="panel panel-default">
+  <div class="panel-body">
+    Open dev tools, copy, paste and run this code.
+  </div>
+</div>
+
+<h3>The <code>this</code> Object</h3>
+<p>If you take a look to the previous example you'll see that <code>sayTitle()</code> method references directly to book object. This can cause problems:
+<ul>
+	<li>If you change your variable name you must remember to change the reference to that property in the method.</li>
+	<li>It makes difficult to reuse this method for differents objects</li>
+</ul>
+
+To avoid this problems we can use <code>this</code> instead of object name to reference method:
+
+<pre>
+  var book = {
+	title: "Object Oriented Javascript",
+	author: "Nicholas C. Zakas",
+	sayTitle: function() {
+ 		console.log("Book title: " + this.title);
+	}
+  }
+
+  book.sayTitle() // output "Book title: Object Oriented Javascript"
+</pre>
+</p>
+<p><b>How to reuse this method in differents objects?</b>
+<pre>
+function sayAllTitles() {
+	console.log("Book title: " + this.title);
+}
+
+var book1 = {
+	title: "JavaScript: The Good Parts",
+	author: "Douglas Crockford",
+	sayTitle: sayAllTitles
+}
+
+var book2 = {
+	title: "Object Oriented Javascript",
+	author: "Nicholas C. Zakas",
+	sayTitle: sayAllTitles
+}
+
+var title = "Fahrenheit 451";
+
+book1.sayTitle() // output "Book title: JavaScript: The Good Parts"
+book2.sayTitle() // output "Book title: Object Oriented Javascript"
+
+sayAllTitles() // output "Book title: Fahrenheit 451"
+</pre>
+</p>
+<p>In this example, we've defined a global variable called title. When <code>sayAllTitles()</code> is called directly, it outputs <code>Book title: Fahrenheit 451</code> because the global variable (<code>title</code>) is considered a property of the global object.</p>
+
+<h3>
+	Changing <code>this</code>
+</h3>
+
+<p>There're three functions methods that allow us to change <code>this</code> value:
+<ul>
+	<li><code>call()</code></li>
+	<li><code>apply()</code></li>
+	<li><code>bind()</code></li>
+</ul>
+</p>
+
+<h4>The <code>call()</code> method</h4>
+<p>Execcutes a function with a given <code>this</code> value and arguments provided individually. The first parameter is the value to which <code>this</code> should be equal when the function is executed. All the others parameters are the parameters that should be passed into the function. We can use it in our example:
+<pre>
+function sayAllTitles( label ) {
+	console.log(label + " -> Book title: " + this.title);
+}
+
+var book1 = {
+	title: "JavaScript: The Good Parts",
+	author: "Douglas Crockford"
+}
+
+var book2 = {
+	title: "Object Oriented Javascript",
+	author: "Nicholas C. Zakas"
+}
+
+var title = "Fahrenheit 451";
+
+sayAllTitles.call(this, "global") 
+// output "global -> Book title: Fahrenheit 451"
+sayAllTitles.call(book1, "book1") 
+// output "book1 -> Book title: JavaScript: The Good Parts"
+sayAllTitles.call(book2, "book2") 
+// output "book2 -> Book title: Object Oriented Javascript"
+
+sayAllTitles() // output "Book title: Fahrenheit 451"
+</pre>
+</p>
+
+<h4>The <code>apply()</code> method</h4>
+<p>This method works exactly the same way as <code>call()</code> except that it accepts a <b>single array of arguments</b>: <code>this</code> value and an array of parameters.</p>
+<p>Our example would be:
+<pre>
+function sayAllTitles( label ) {
+	console.log(label + " -> Book title: " + this.title);
+}
+
+var book1 = {
+	title: "JavaScript: The Good Parts",
+	author: "Douglas Crockford"
+}
+
+var book2 = {
+	title: "Object Oriented Javascript",
+	author: "Nicholas C. Zakas"
+}
+
+var title = "Fahrenheit 451";
+
+sayAllTitles.apply(this, ["global"]) 
+// output "global -> Book title: Fahrenheit 451"
+sayAllTitles.apply(book1, ["book1"]) 
+// output "book1 -> Book title: JavaScript: The Good Parts"
+sayAllTitles.apply(book2, ["book2"]) 
+// output "book2 -> Book title: Object Oriented Javascript"
+
+sayAllTitles() // output "Book title: Fahrenheit 451"
+</pre>
+</p>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <p>For more info you can check out this resources: 
+    	<ul>
+    		<li>Difference between <code>call()</code> and <code>apply()</code> functions. <a href="http://hangar.runway7.net/javascript/difference-call-apply" target="_blank">Read article</a></li>
+    		<li>MDN definitions for <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call">call()</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply">apply()</a></li>
+    	</ul>
+    </p>
+  </div>
+</div>
+
+<h4>The <code>bind()</code> method</h4>
+<p></p>
+<p>
+	<a href="#/" class="btn btn-default">Back to home</a>
+	<a href="#/understanding-objects" class="btn btn-default pull-right">Go to next section</a>
+	<br>
+</p>

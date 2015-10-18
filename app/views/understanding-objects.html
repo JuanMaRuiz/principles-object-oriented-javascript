@@ -1,0 +1,49 @@
+<ol class="breadcrumb">
+  	<li>
+  		<a href="#/">Home</a>
+  	</li>
+    <li class="active">Understanding Objects</li>
+</ol>
+<h2>Defining Properties</h2>
+<p>There are two ways to create our own objects with its properties:
+
+<pre>
+var book1 = {
+	title: "Object Oriented Javascript",
+	author: "Nicholas C. Zakas",
+}
+
+var book2 = new Object();
+book2.title = "JavaScript: The Good Parts";
+book2.author = "Douglas Crockford";
+</pre>
+</p>
+
+<h2>Detecting Properties</h2>
+<p>A reliable way to test if a property exist in the object is with <code>in</code> operator. The <code>in</code> operator returns <code>true</code> if the specified property (property or method property) is found in the specific object. So, in our example:
+<pre>
+var book = {
+	title: "Object Oriented Javascript",
+	author: "Nicholas C. Zakas",
+}
+console.log("title" in book); // output true
+</pre>
+</p>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <p>For more info you can check out this <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/in">article</a> from <i>Mozilla Develpment Network</i>
+    </p>
+  </div>
+</div>
+<p>When you want to check if the poperty is an own property or not you need to use <code>hasOwnProperty()</code> method. This method returns <code>true</code> if the given property exists and is and own property.
+<pre>
+var book = {
+	title: "Object Oriented Javascript",
+	author: "Nicholas C. Zakas",
+}
+console.log(book.hasOwnProperty("title")); // output true
+console.log(book.hasOwnProperty("toString")); // output false
+</pre>
+</p>
+<h2>Removing properties</h2>
+<p></p>

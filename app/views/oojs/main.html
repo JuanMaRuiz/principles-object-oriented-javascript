@@ -1,0 +1,32 @@
+<div ng-controller="ListofbooksCtrl">
+    <div class="row">
+    <div class="col-xs-6 col-md-3">
+      <a href="#" class="thumbnail">
+        <img src="images/principles-of-object-oriented-javascript.png" alt="Whatever">
+      </a>
+    </div>
+    Author: Nicholas C. Zakas 
+  </div>
+  <div class="row marketing" ng-model="id">
+    <h2>Brief Content</h2>
+    <ol>
+      <li ng-repeat="book in books">{{book.chapters}}</li>
+      <!-- <li>
+        <a href="#/functions">Functions</a>
+      </li>
+      <li>
+        <a href="#/understanding-objects">Understanding Objects</a>
+      </li>
+      <li>
+        <a href="#/constructors-prototypes">Constructors and Prototypes</a>
+      </li>
+      <li>
+        <a href="#/inheritance">Inheritance</a>
+      </li>
+      <li>
+        <a href="#/object-patterns">Object Patterns</a>
+      </li> -->
+    </ol>
+  </div>
+
+</div>

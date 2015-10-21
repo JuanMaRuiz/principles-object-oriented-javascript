@@ -24,28 +24,33 @@ angular
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
+      .when('/oojs', {
+        templateUrl: 'views/oojs/main.html',
+        controller: 'ListofbooksCtrl',
+        controllerAs: 'bookList'
+      })
       .when('/functions', {
-        templateUrl: 'views/functions.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
+        templateUrl: 'views/oojs/functions.html',
+        controller: '../ListofbooksCtrl',
+        controllerAs: 'bookList'
       })
       .when('/understanding-objects', {
-        templateUrl: 'views/understanding-objects.html',
+        templateUrl: 'views/oojs/understanding-objects.html',
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
       .when('/constructors-prototypes', {
-        templateUrl: 'views/constructors-prototypes.html',
+        templateUrl: 'views/oojs/constructors-prototypes.html',
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
       .when('/inheritance', {
-        templateUrl: 'views/inheritance.html',
+        templateUrl: 'views/oojs/inheritance.html',
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
       .when('/object-patterns', {
-        templateUrl: 'views/object-patterns.html',
+        templateUrl: 'views/oojs/object-patterns.html',
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })

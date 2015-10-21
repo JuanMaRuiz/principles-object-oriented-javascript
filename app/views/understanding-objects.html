@@ -1,1 +1,109 @@
-<p>This is the understanding-objects view.</p>
+<ol class="breadcrumb">
+  	<li>
+  		<a href="#/">Home</a>
+  	</li>
+    <li class="active">Understanding Objects</li>
+</ol>
+<h2>Defining Properties</h2>
+<p>There are two ways to create our own objects with its properties:
+
+<pre>
+var book1 = {
+	title: "Object Oriented Javascript",
+	author: "Nicholas C. Zakas",
+}
+
+var book2 = new Object();
+book2.title = "JavaScript: The Good Parts";
+book2.author = "Douglas Crockford";
+</pre>
+</p>
+
+<h2>Detecting Properties</h2>
+<p>A reliable way to test if a property exist in the object is with <code>in</code> operator. The <code>in</code> operator returns <code>true</code> if the specified property (property or method property) is found in the specific object. So, in our example:
+<pre>
+var book = {
+	title: "Object Oriented Javascript",
+	author: "Nicholas C. Zakas",
+}
+console.log("title" in book); // output true
+</pre>
+</p>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <p>For more info you can check out this <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/in">article</a> from <i>Mozilla Develpment Network</i>
+    </p>
+  </div>
+</div>
+<p>When you want to check if the poperty is an own property or not you need to use <code>hasOwnProperty()</code> method. This method returns <code>true</code> if the given property exists and is and own property.
+<pre>
+var book = {
+	title: "Object Oriented Javascript",
+	author: "Nicholas C. Zakas",
+}
+console.log(book.hasOwnProperty("title")); // output true
+console.log(book.hasOwnProperty("toString")); // output false
+</pre>
+</p>
+<h2>Removing properties</h2>
+<p>To remove an object property you must to use <code>delete</code> operator, setting a property to <code>null</code> only replace the value of the property.</p>
+<p>This operator works on a single object property, removing a <i>key/value</i> pair from a hash table.</p>
+<p>In our example:
+<pre>
+var book = {
+  title: "Object Oriented Javascript",
+  author: "Nicholas C. Zakas",
+}
+console.log(book.title); // output: Object Oriented Javascript
+delete book.title
+console.log("title" in book); // output: false
+console.log(book.title); // output: undefined
+</pre>
+</p>
+<h2>Enumeration</h2>
+<p>All properties on an object are enumeralbes. Using the <code>propertyIsEnumerable()</code> (which is present on every object) method you can check wheter property is enumerable</p>
+<p>Let's go check it in our example:
+<pre>
+var book = {
+  title: "Object Oriented Javascript",
+  author: "Nicholas C. Zakas",
+}
+
+console.log("title" in book);                    // true
+console.log(book.propertyIsEnumerable("title")); // true
+</pre>
+</p>
+
+<h2>Types of properties</h2>
+<p>
+  <ul>
+    <li><b><i>Data properties</i></b>.- It contains a value.</li>
+    <li><b><i>Accessor properties</i></b>. Define a function to call when the property is read and another function when the property is written-</li>
+  </ul>
+<pre>
+var book = {
+  _title: "Object Oriented Javascript",
+
+  get title() {
+    console.log("Getting the title");
+    return this._title;
+  },
+
+  set title(value) {
+    this._title = value;
+    console.log("Setting a new title" + this._title);
+  }
+}
+
+console.log(book.title);
+// Getting the title "Object Oriented Javascript"
+book.title = "Javascript The good parts"
+console.log(book.title);
+// Setting a new title "Javascript The good parts"
+</pre>
+</p>
+
+<h2>Property attributes</h2>
+<h3>Common atributes</h3>
+<h3>Data property attributes</h3>
+<h3>Accessor property attributes</h3>

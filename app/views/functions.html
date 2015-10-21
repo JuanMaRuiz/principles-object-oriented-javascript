@@ -1,3 +1,9 @@
+<ol class="breadcrumb">
+  	<li>
+  		<a href="#/">Home</a>
+  	</li>
+    <li lass="active">Functions</li>
+</ol>
 <h2>Object Methods</h2>
 <p>The property of an object is considered a method when its value is actually a function. For example:</p>
 <pre>
@@ -95,16 +101,62 @@ var book2 = {
 
 var title = "Fahrenheit 451";
 
-sayAllTitles.call(this, "global") // output "global -> Book title: Fahrenheit 451"
-sayAllTitles.call(book1, "book1") // output "book1 -> Book title: JavaScript: The Good Parts"
-sayAllTitles.call(book2, "book2") // output "book2 -> Book title: Object Oriented Javascript"
+sayAllTitles.call(this, "global") 
+// output "global -> Book title: Fahrenheit 451"
+sayAllTitles.call(book1, "book1") 
+// output "book1 -> Book title: JavaScript: The Good Parts"
+sayAllTitles.call(book2, "book2") 
+// output "book2 -> Book title: Object Oriented Javascript"
 
 sayAllTitles() // output "Book title: Fahrenheit 451"
 </pre>
 </p>
 
 <h4>The <code>apply()</code> method</h4>
-<p></p>
+<p>This method works exactly the same way as <code>call()</code> except that it accepts a <b>single array of arguments</b>: <code>this</code> value and an array of parameters.</p>
+<p>Our example would be:
+<pre>
+function sayAllTitles( label ) {
+	console.log(label + " -> Book title: " + this.title);
+}
+
+var book1 = {
+	title: "JavaScript: The Good Parts",
+	author: "Douglas Crockford"
+}
+
+var book2 = {
+	title: "Object Oriented Javascript",
+	author: "Nicholas C. Zakas"
+}
+
+var title = "Fahrenheit 451";
+
+sayAllTitles.apply(this, ["global"]) 
+// output "global -> Book title: Fahrenheit 451"
+sayAllTitles.apply(book1, ["book1"]) 
+// output "book1 -> Book title: JavaScript: The Good Parts"
+sayAllTitles.apply(book2, ["book2"]) 
+// output "book2 -> Book title: Object Oriented Javascript"
+
+sayAllTitles() // output "Book title: Fahrenheit 451"
+</pre>
+</p>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <p>For more info you can check out this resources: 
+    	<ul>
+    		<li>Difference between <code>call()</code> and <code>apply()</code> functions. <a href="http://hangar.runway7.net/javascript/difference-call-apply" target="_blank">Read article</a></li>
+    		<li>MDN definitions for <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call">call()</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply">apply()</a></li>
+    	</ul>
+    </p>
+  </div>
+</div>
 
 <h4>The <code>bind()</code> method</h4>
 <p></p>
+<p>
+	<a href="#/" class="btn btn-default">Back to home</a>
+	<a href="#/understanding-objects" class="btn btn-default pull-right">Go to next section</a>
+	<br>
+</p>

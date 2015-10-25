@@ -190,3 +190,97 @@ console.log(book.title);                     // OOJS
 </p>
 <div class="alert alert-warning" role="alert">In <b>strict mode</b> nonwritable properties thrown an error when you try to change the value. Otherwise silenty fails.</div>
 <h3>Accessor property attributes</h3>
+<p>Accessor properties have two additional properties:
+<ul>
+  <li><b><i>Get.- </i></b> Contains get function.</li>
+  <li><b><i>Set.- </i></b> Contains set function.</li>
+</ul></p>
+<div class="alert alert-warning" role="alert">There is no value stored for accessor properties so they've not this properties. If you try to create this properties you'll get an error.</div>
+<p>There're two ways to create accessor properties on an object:
+<ul>
+  <li>Defining this properties when you create the object literal.</li>
+  <li>Using <code>.defineProperty()</code> method to add attributes to the object later you create the object.</li>
+</ul></p>
+<p>We can rewrite the previous example as follows:
+<pre>
+// Previews example
+var book = {
+  _title: "Object Oriented Javascript",
+
+  get title() {
+    console.log("Reading title");
+    return this._title;
+  },
+
+  set title(value) {
+    console.log("Setting new title");
+    this._title = value;
+  }
+}
+
+// Using defineProperty() method
+var book = {
+  _title: "Object Oriented Javascript"
+}
+
+Object.defineProperty(book, "title", {
+  get: function() {
+    console.log("Reading property");
+    return this._title;
+  },
+  set: function(value) {
+    console.log("Setting new title");
+    this._title = value;
+  },
+  enumerable: true,
+  configurable: true
+})
+</pre>
+</p>
+<h3>Defining multiple properties</h3>
+<p>We can define several properties at once using <code>.defineProperties()</code> instead of <code>.defineProperty()</code> method. See the example below:
+<pre>
+ var book = {};
+
+ Object.defineProperties(book, {
+  // data property to store data
+  _title: {
+    value: "Object Oriented Javascript",
+    enumerable: true,
+    writable: true,
+    configurable: true
+  },
+
+  // accessor property
+  title: {
+    get: function() {
+      console.log("Reading property");
+      return this._title;
+    },
+    set: function(value) {
+      console.log("Setting new title");
+      this._title = value;
+    },
+    enumerable: true,
+    configurable: true
+  }
+ }); 
+</pre>
+</p>
+<h3>Retrieving Property attributes</h3>
+<p>You can do it using <code>.getOwnPropertyDescriptor()</code>, it only works with own properties. This method accepts tow arguments: the object and de property name to retrieve.</p>
+<p>Example:
+<pre>
+ var book = {
+  title: "Object Oriented Javascript"
+ }
+
+ var descriptor = Object.getOwnPropertyDescriptor(book, "title");
+
+ console.log(descriptor.enumerable)    // true
+ console.log(descriptor.configurable)  // true
+ console.log(descriptor.writable)      // true
+ console.log(descriptor.value)         // Object Oriented Javascript
+</pre>
+</p>
+<h4>Preventing Object Modification</h4>

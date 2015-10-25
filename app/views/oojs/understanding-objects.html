@@ -105,5 +105,88 @@ console.log(book.title);
 
 <h2>Property attributes</h2>
 <h3>Common atributes</h3>
+<p>In objects, exist two property attributes shared between data and accesor properties:
+<ul>
+  <Li><b><i>Enumerable.-</i></b> Determines whether you can iterate over the property.</Li>
+  <Li><b><i>Configurable.-</i></b> Determines whether the property can be changed.</Li>
+</ul>
+</p>
+<p>By default, when you create a new object all properties are declared enumerable and configurable.</p>
+<p>You can change property attributes using <code>.defineProperty()</code> method. This method accepts three arguments:
+<ul>
+  <li>The object.</li>
+  <li>The property name</li>
+  <li>Property descriptor object containing the attributes to set</li>
+</ul>
+<pre>
+var book = {
+  title: "Object Oriented Javascript",
+}
+
+var properties = Object.keys(book);
+console.log(book.propertyIsEnumerable("title"))   // true
+console.log(properties.lenght)                    // 1
+
+// Setting enumerable property to false
+Object.defineProperty(book, "title", {
+  enumerable: false
+});
+
+console.log(book.propertyIsEnumerable("title"))   // false
+console.log(properties.lenght)                    // 0
+
+// Deleting properties
+delete book.title;
+console.log("title" in book);                     // false
+
+// Adding title property again to configure as non configurable
+book.title = "Object Oriented JavaScript";
+console.log("title" in book);                      // true
+
+Object.defineProperty(book, "title", {
+  configurable: false
+});
+
+// try to delete title property
+
+detele book.title;
+console.log("title" in book);                      // false
+console.log(book.title);                           // "Object Oriented JavaScript"
+
+</pre>
+</p>
+<div class="alert alert-warning" role="alert">If you try to delete a nonconfigurable property when javascript is running in strict mode, this operation result an error. Otherwise the operatitan silenty fail.</div>
 <h3>Data property attributes</h3>
+<p>Data property has to addtional attributes that accessors don't:
+<ul>
+  <li><b><i>Value.-</i></b> Value (string or functiont) assigned to the property when you create a property on an object.</li>
+  <li><b><i>Writable.-</i></b> Boolean value indicating wheter the property can be written to.</li>
+</ul></p>
+<p>When you define a property with <code>defineProperty()</code> method, it's important to specify all of the attribues because <code>Boolean</code> attributes are setting to <code>false</code> by default.</p>
+<p>
+<pre>
+var book = {};
+
+Object.defineProperty(book, "title", {
+  value: "Object Oriented Javascript",
+  writable: true,
+  enumerable: true,
+  configurable: true
+});
+
+console.log("title" in book);               // Object Oriented Javascript
+
+book.title = "OOJS";
+console.log(book.title);                    // OOJS
+
+Object.defineProperty(book, "title", {
+  writable: false
+});
+
+book.title = "Object Oriented Javascript"
+console.log(book.title);                     // OOJS
+
+</pre>
+</p>
+<div class="alert alert-warning" role="alert">In <b>strict mode</b> nonwritable properties thrown an error when you try to change the value. Otherwise silenty fails.</div>
 <h3>Accessor property attributes</h3>
